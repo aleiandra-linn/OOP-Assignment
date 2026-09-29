@@ -1,47 +1,59 @@
-//import java.util.ArrayList;
+import java.util.ArrayList; 
+
 public class Customer {
     private String firstName;
     private String lastName;
-    private Account account;//one person one account
+    private String username;
+    private String password;
     
-    /* if using array static
-    private Account[] account = new Account[5];
-    private int numberOfAccounts;
+    // ada banyak rekening 
+    private ArrayList<Account> accounts;
 
-    if using dynamic arraylist
-    private ArrayList<Account> accounts = new ArrayList<>();
-
-    public void addAccount(Account acct) {
-    this.accounts.add(acct); // Otomatis bertambah 
-    }
-    public Account getAccount(int index) {
-    return this.accounts.get(index);
-    }*/
-
-    public Customer(String f, String l){
-        this.firstName = f;
-        this.lastName = l;
-        //this.(instance variable) = parameter
+    public Customer(String firstName, String lastName, String username, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.accounts = new ArrayList<>();
     }
 
-    public String getfirstName(){
+    public String getFirstName() {
         return this.firstName;
     }
 
-    public String getlastName(){
+    public String getLastName() {
         return this.lastName;
     }
 
-    public Account getAccount(){
-        return this.account;
+    public String getUsername() {
+        return this.username;
     }
 
-    public void setAccount(Account acc){
-        this.account = acc;
+    public boolean validatePassword(String inputPassword) {
+        return this.password.equals(inputPassword);
     }
 
+    public void addAccount(Account acc) {
+        this.accounts.add(acc);
+    }
 
-    
+    // ngambil rekening utama (indeks 0)
+    public Account getAccount() {
+        if (!accounts.isEmpty()) {
+            return this.accounts.get(0);
+        }
+        return null;
+    }
 
+    //ngambil rekening berdasarkan indeks tertentu 
+    public Account getAccount(int index) {
+        if (index >= 0 && index < accounts.size()) {
+            return this.accounts.get(index);
+        }
+        return null;
+    }
 
+    public int getNumOfAccounts() {
+        return this.accounts.size();
+    }
 }
